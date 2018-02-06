@@ -1,0 +1,169 @@
+
+header {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #4D3670;
+}
+
+.header-h1 {
+  color: #ff0b3f;
+  padding-left: 20%;
+}
+.login-link {
+  display: block;
+  position: fixed;
+  left: 90%;
+  top: 30px;
+  outline: 0;
+  color: #ff0b3f;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+.logout-link {
+  display: block;
+  position: fixed;
+  left: 90%;
+  top: 30px;
+  outline: 0;
+  color: #ff0b3f;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.user-img {
+  display: block;
+  position: fixed;
+  left: 85%;
+  top: 10px;
+  width: 55px;
+  height: 55px;
+  border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+}
+
+.user-name {
+  display: block;
+  position: fixed;
+  left: 76%;
+  top: 10px;
+  color: #ff0b3f;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.category {
+  width: 20%;
+  background-color: #a4a0a2;
+  height: calc(100% - 70px);
+  top: 70px;
+  position: fixed;
+  overflow: auto;
+  text-align: center;
+  display: block;
+  border-right: thick solid #1f1e1f;
+}
+
+.category h1 {
+  padding: 15px;
+  color: #770a31;
+}
+.category ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.items {
+  display: block;
+  position: fixed;
+  top: 70px;
+  left: 20%;
+  width: 80%;
+  height: calc(100% - 70px);
+  overflow: auto;
+}
+
+.items ul {
+  list-style-type: none;
+  text-align: center;
+  padding-left: 40px;
+  font-size: 30px;
+  font-family: sans-serif monospace serif verdana;
+
+}
+
+.items h1 {
+  padding-left: 370px;
+  color: #770a31;
+}
+
+.items p {
+  display: inline;
+  color: #3d3f40;
+}
+
+
+li a {
+  color: #ff0b3f;
+  display: block;
+  padding: 8px 16px;
+  margin: 0px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0;
+}
+li a:hover {
+  color: #ffffff;
+  background-color: #8c0441;
+}
+
+li a:active {
+  background-color: #630b53;
+}
+
+.all-cats-link {
+  text-decoration: none;
+  outline: 0;
+  color: #770a31;
+
+}
+
+.delete-link {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  text-decoration: none;
+  outline: 0;
+  color: #91072d;
+}
+
+.edit-link {
+  position: absolute;
+  top: 10px;
+  left: 90px;
+  text-decoration: none;
+  outline: 0;
+  color: #91072d;
+}
+
+.add-link {
+  position: absolute;
+  top: 10px;
+  left: 130px;
+  text-decoration: none;
+  outline: 0;
+  color: #91072d;
+
+#flashed{
+  color: #c30d0d;
+  font-size: 0.7em;
+
+
+}

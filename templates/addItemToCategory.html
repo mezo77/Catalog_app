@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>Adding an item</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1.0" />
+  <link rel="icon" href="../static/Buying_48.ico" />
+  <link rel="stylesheet" href="{{url_for('static', filename='addItem_styles.css')}}" />
+</head>
+<body>
+  <header>
+    <h1 class="header-h1">Catalog App</h1>
+    <a class="logout-link" href="{{url_for('disconnect')}}">Logout Here</a>
+    <img class="user-img" src="{{creator.picture}}" />
+    <p class="user-name">{{creator.name}}</p>
+  </header>
+<div class="addingform">
+  <h1>adding a new item to {{category.name}} category</h1>
+  <form action="{{url_for('addNewItem', category_name=category.name)}}" method="post">
+    <p class="item-name-label">Name</p>
+    <input class="item-name" type="text" name="name" placeholder="enter a name" />
+    <p class="item-des-label">Description</p>
+    <textarea name="description" class="item-des" rows="5" cols="50" draggable="false" spellcheck="true" ></textarea>
+    <input class="controllers-sbmt"  type="submit" value="Add" />
+    <a class="controllers-link" href="{{ url_for('showItemsInACategory', category_name=category.name) }}">Cancel</a>
+
+  </form>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <title>Adding new Category</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width initial-scale=1.0" />
+  <link rel="icon" href="../static/Buying_48.ico" />
+  <link rel="stylesheet" href="{{url_for('static', filename='deleteCategory_styles.css')}}" />
+</head>
+<body>
+  <header>
+    <h1 class="header-h1">Catalog App</h1>
+    <a class="logout-link" href="{{url_for('disconnect')}}">Logout Here</a>
+    <img class="user-img" src="{{creator.picture}}" />
+    <p class="user-name">{{creator.name}}</p>
+  </header>
+<div class="deleteform">
+  <h1>Are you sure you want to delete {{category.name}} category?</h1>
+  <form action="{{url_for('deleteACategory', category_name=category.name)}}" method="post">
+    <input class="controllers-sbmt"  type="submit" value="Delete" />
+    <a class="controllers-link" href="{{url_for('showItemsInACategory', category_name=category.name)}}">Cancel</a>
+
+  </form>
+</div>
+</body>
+
+</html>

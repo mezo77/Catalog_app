@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{category.name}} Items</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <link rel="icon" href="../static/Buying_48.ico" />
+    <link rel="stylesheet" href="{{url_for('static', filename='category_styles.css')}}" />
+  </head>
+  <body>
+    <header>
+      <h1 class="header-h1">Catalog App</h1>
+      <a class="login-link" href="{{url_for('showLogin')}}">Login Here</a>
+    </header>
+    <div class="category">
+      <h1><a class="all-cats-link" href="{{url_for('showAllCategories')}}">Categories</a></h1>
+      {% for c in categories %}
+      <h3>
+        <ul>
+          <li>
+            <a href="{{url_for('showItemsInACategory', category=category, items=items, category_name=c.name)}}">{{ c.name }}</a>
+          </li>
+        </ul>
+      </h3><br />
+      {% endfor %}
+    </div>
+    <div class="items">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <ul class="flashedMessages">
+        <li>
+          <p id="flashed">{{message}}</p>
+        </li>
+      </ul>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <h1>{{category.name}} items <p class="no-of-items-tag">
+        {% if count > 1 %}
+        ({{count}} items)
+        {% else%}
+        ({{count}} item)
+        {% endif %}
+      </p></h1>
+      {% for i in items %}
+      <ul>
+        <li>
+          <a href="{{url_for('showItemDescription', category_name=category.name, item_name=i.name)}}"> {{i.name}} <p>(click for description)</p></a>
+        </li>
+      </ul>
+      {% endfor %}
+    </div>
+  </body>
+</html>

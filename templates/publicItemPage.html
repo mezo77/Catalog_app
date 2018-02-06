@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>All Categories</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <link rel="icon" href="../static/Buying_48.ico" />
+    <link rel="stylesheet" href="../static/categories_styles.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='itemDescription_styles.css')}}"/>
+  </head>
+<body>
+  <header>
+    <h1 class="header-h1">Catalog App</h1>
+  </header>
+  <div class="item-description">
+    <h1>{{item.name}}</h1>
+    <p>
+      {{item.description}}
+    </p>
+    <a class="back-link" href="{{url_for('showItemsInACategory', category_name=item.cat_name)}}">Back</a>
+  </div>
+</body>
+</html>

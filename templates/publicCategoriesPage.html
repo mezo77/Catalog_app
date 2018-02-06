@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>All Categories</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <link rel="icon" href="../static/Buying_48.ico" />
+    <link rel="stylesheet" href="../static/categories_styles.css" />
+  </head>
+<body>
+  <header>
+    <h1 class="header-h1">Catalog App</h1>
+    <a class="login-link" href="{{url_for('showLogin')}}">Login Here</a>
+  </header>
+  <div class="category">
+    <h1><a class="all-cats-link" href="{{url_for('showAllCategories')}}">Categories</a></h1>
+    {% for c in categories %}
+    <h3>
+      <ul>
+        <li>
+          <a href="{{ url_for('showItemsInACategory', category_name=c.name) }}">{{ c.name }}</a>
+        </li>
+      </ul>
+    </h3><br />
+    {% endfor %}
+  </div>
+  <h1 class="lst-added-items-tag">Last added items</h1>
+  <div class="items">
+    {% for i in items %}
+    <ul>
+      <li>
+        <a href="{{url_for('showItemDescription', item_name=i.name, category_name=i.cat_name)}}">{{i.name}} <p>({{i.cat_name}})</p></a>
+      </li>
+    </ul>
+    {% endfor %}
+  </div>
+</body>
+</html>
