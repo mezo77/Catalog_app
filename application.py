@@ -373,11 +373,11 @@ def addANewCategory():
 @app.route('/categories/<string:category_name>/delete',
            methods=['GET', 'POST'])
 def deleteACategory(category_name):
+    if 'username' not in login_session:
+        return redirect('/login')
     category_to_delete = session.query(Category).filter_by(
                                        name=category_name).first()
     creator = getUserInfo(category_to_delete.user_id)
-    if 'username' not in login_session:
-        return redirect('/login')
     if category_to_delete.user_id != login_session['user_id']:
         return '''<script>function myFunction() {
                 alert('you are not authorized to do this operation.');}
@@ -467,6 +467,10 @@ def deleteItem(category_name, item_name):
     creator = getUserInfo(category.user_id)
     item = session.query(CategoryItem).filter_by(name=item_name).first()
     name = item.name
+    if category.user_id != login_session['user_id']:
+        return '''<script>function myFunction() {
+                alert('you are not authorized to do this operation.');}
+                 </script><body onload="myFunction()"> '''
     if request.method == 'POST':
         session.delete(item)
         session.commit()
@@ -490,6 +494,10 @@ def editItem(category_name, item_name):
     creator = getUserInfo(category.user_id)
     categories = session.query(Category).all()
     item = session.query(CategoryItem).filter_by(name=item_name).first()
+    if category.user_id != login_session['user_id']:
+        return '''<script>function myFunction() {
+                alert('you are not authorized to do this operation.');}
+                 </script><body onload="myFunction()"> '''
     if request.method == 'POST':
         name = request.form['name']
         if name != '':
@@ -499,12 +507,17 @@ def editItem(category_name, item_name):
             session.add(item)
             session.commit()
             flash("you have edited %s item successfully" % name)
-            return redirect(url_for('showItemsInACategory', category_name=category.name))
+            return redirect(url_for('showItemsInACategory',
+                            category_name=category.name))
         else:
             flash("editing %s item was NOT successfull" % name)
-            return redirect(url_for('showItemsInACategory', category_name=category.name))
+            return redirect(url_for('showItemsInACategory',
+                            category_name=category.name))
     else:
-        return render_template('editItem.html', category_name=category.name, item_name=item.name, item=item, category=category, categories=categories, creator=creator)
+        return render_template('editItem.html', category_name=category.name,
+                               item_name=item.name, item=item,
+                               category=category, categories=categories,
+                               creator=creator)
 
 
 # this method for login
