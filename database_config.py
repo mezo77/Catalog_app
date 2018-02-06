@@ -39,6 +39,7 @@ class Category(Base):
     name = Column(String(100), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
+    category_item = relationship('CategoryItem', cascade='all, delete-orphan')
 
     @property
     def serialize(self):

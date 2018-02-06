@@ -29,8 +29,7 @@ Vagrant is the software that configures the VM and lets you share files between 
 # How to run this app
 # Clone this Repo to your local machine
 From the terminal, run the following command (be sure to replace `<username>` with your GitHub username):
-git clone http://github.com/`<username>`/https://github.com/mezo77/Catalog_app catalog
-
+git clone http://github.com/ `<username>`/https://github.com/mezo77/Catalog_app catalog
 this will make a directory named catalog
 
 #Run the virtual machine
