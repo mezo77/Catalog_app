@@ -264,6 +264,10 @@ def disconnect():
         flash("You were not logged in")
         return redirect(url_for('showAllCategories'))
 
+
+# this method is invoked when the user clicks categories link
+# on the navigation menu and it's called too in the homepage to list all
+# the categories in the nav menu
 @app.route('/')
 @app.route('/categories')
 def showAllCategories():
@@ -278,6 +282,8 @@ def showAllCategories():
         return render_template("categories.html", categories=categories, items=items, creator=creator)
 
 
+# this method is invoked when the user clicks on a category name
+# on tha navigation menu on the left
 @app.route('/categories/<string:category_name>/items')
 def showItemsInACategory(category_name):
     category = session.query(Category).filter_by(name=category_name).first()
@@ -291,6 +297,8 @@ def showItemsInACategory(category_name):
         return render_template("category.html", items=items, category=category, count=items_count, categories=categories, category_name=category.name, creator=creator)
 
 
+# this method is invoked when the user clicks on the item for descritption
+# in the homepage and category page page
 @app.route('/categories/<string:category_name>/<string:item_name>')
 def showItemDescription(category_name, item_name):
     category = session.query(Category).filter_by(name=category_name).first()
@@ -302,6 +310,8 @@ def showItemDescription(category_name, item_name):
         return render_template('itemDescription.html', item=item, creator=creator)
 
 
+# this method is invoked when the user clicks the add category link
+# in the homepage
 @app.route('/categories/add-category', methods=['GET', 'POST'])
 def addANewCategory():
     if 'username' not in login_session:
@@ -328,6 +338,8 @@ def addANewCategory():
         return render_template('addcategory.html', creator=creator)
 
 
+# this method is invoked when the user clicks the delete link
+# in the category page
 @app.route('/categories/<string:category_name>/delete', methods=['GET', 'POST'])
 def deleteACategory(category_name):
     category_to_delete = session.query(Category).filter_by(name=category_name).first()
@@ -347,6 +359,8 @@ def deleteACategory(category_name):
         return render_template('deleteCategory.html', category_name=category_to_delete.name, category_to_delete=category_to_delete, category=category_to_delete, creator=creator)
 
 
+# this method is invoked when the user clicks the edit link
+# in the category page
 @app.route('/categories/<string:category_name>/edit', methods=['GET', 'POST'])
 def editACategory(category_name):
     category_to_edit = session.query(Category).filter_by(name=category_name).first()
@@ -364,14 +378,20 @@ def editACategory(category_name):
             session.add(category_to_edit)
             session.commit()
             flash("you have successfully updated a category")
-            return redirect(url_for('showItemsInACategory', category_name=category_to_edit.name))
+            return redirect(url_for('showItemsInACategory',
+                            category_name=category_to_edit.name))
         else:
             flash("you have NOT edited the category, text field was left blank")
-            return redirect(url_for('showItemsInACategory', category_name=category_to_edit.name))
+            return redirect(url_for('showItemsInACategory',
+                            category_name=category_to_edit.name))
     else:
-        return render_template('editCategory.html', category_name=category_to_edit.name, category=category_to_edit, creator=creator)
+        return render_template('editCategory.html',
+                                category_name=category_to_edit.name,
+                                category=category_to_edit, creator=creator)
 
 
+# this method is invoked when the user clicks the additem link
+# in the category page
 @app.route('/categories/<string:category_name>/addnewitem', methods=['GET', 'POST'])
 def addNewItem(category_name):
     if 'username' not in login_session:
@@ -395,7 +415,8 @@ def addNewItem(category_name):
         return render_template('addItemToCategory.html', category=category, creator=creator)
 
 
-
+# this method is invoked when the user clicks the delete link
+# in the item description page
 @app.route('/categories/<string:category_name>/<string:item_name>/delete', methods=['GET', 'POST'])
 def deleteItem(category_name, item_name):
     if 'username' not in login_session:
@@ -413,7 +434,8 @@ def deleteItem(category_name, item_name):
         return render_template('deleteItem.html', category_name=category.name, item_name=item.name, item=item, category=category, creator=creator)
 
 
-
+# this method is invoked when the user clicks the edit link
+# in the item description page
 @app.route('/categories/<string:category_name>/<string:item_name>/edit', methods=['GET', 'POST'])
 def editItem(category_name, item_name):
     if 'username' not in login_session:
@@ -439,13 +461,16 @@ def editItem(category_name, item_name):
         return render_template('editItem.html', category_name=category.name, item_name=item.name, item=item, category=category, categories=categories, creator=creator)
 
 
+# this method for login
 @app.route('/login')
 def showLogin():
+    # this will generate 32-characters string
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)
 
 
+# this method used to retrieve the data in the catalog in JSON format
 @app.route('/catalog.json')
 def showITEMSJSON():
     # categories = session.query(Category).all()
